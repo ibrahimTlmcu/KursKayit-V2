@@ -13,10 +13,12 @@
     <h2 style="text-align:center">Kurs Listesi</h2>
     <a style="margin-bottom:15px;" href="/Kurs/Create" class="btn btn-primary">Kurs Ekle</a>
     <table class="table table-success">
-        <thead class="thead-dark table-hover">
+        <thead>
             <tr>
                 <th style="width:150px;">@Html.DisplayNameFor(m=>m.KursID)</th>
                 <th>@Html.DisplayNameFor(m=>m.KursBaslik)</th>
+                <th>Ad Soyad</th>
+
 
                 <th style="width:150px"></th>
             </tr>
@@ -27,6 +29,7 @@
                 <tr>
                     <td><b>@Kurs.KursID</b></td>
                     <td><b>@Kurs.KursBaslik</b></td>
+                    <td><b>@Kurs.Ogretmen.AdSoyad</b></td>
                     <td>
                         @*burdan gelen id Ogrenci Controller icinden edit kismina gidiyor editte
                     eslesen id varsa bunu kontrol edip return ediyor.*@

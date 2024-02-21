@@ -9,15 +9,33 @@
 *@
 @{
 }
+<div class="orta-div">
+    <form asp-controller="Kurs" asp-action="Create" method="post">
+        <div class="mb-3">
+            <label asp-for="KursBaslik" class="form-label">Kurs Adi</label>
+            <input asp-for="KursBaslik" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="OgretmenId" class="form-label"> Ogretmen </label>
+            <select asp-for="OgretmenId" asp-items="ViewBag.Ogretmenler">
+                <option value="">Seciniz</option>
+            </select>
+        </div>
 
-<form asp-controller="Kurs" asp-action="Create" method="post">
-    <div class="mb-3">
-        <label asp-for="KursBaslik" class="form-label">Kurs Adi</label>
-        <input asp-for="KursBaslik" class="form-control" />
-    </div>
+        <button type="submit" class="btn btn-primary">Kaydet</button>
 
-  
+    </form>
 
-    <button type="submit" class="btn btn-primary">Kaydet</button>
+</div>
 
-</form>
+<style>
+    .orta-div {
+        width: 50%; /* Sayfanın genişliğinin yarısı kadar genişlik */
+        margin: 27%; /* Dikey hizalama için margin kullanarak otomatik olarak ortalamak */
+        padding: 20px; /* İçerik ile kenar arasında boşluk bırakmak için */
+        border: 1px solid #ccc; /* Kenarlık eklemek */
+        border-radius: 10px; /* Kenar yuvarlaklığı */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Gölge efekti */
+        background-color: #fff; /* Arka plan rengi */
+    }
+</style>

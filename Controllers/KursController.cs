@@ -1,5 +1,6 @@
 ﻿using KursKayir.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace KursKayir.Controllers
@@ -15,8 +16,9 @@ namespace KursKayir.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Ogretmenler = new SelectList(await _context.Ogretmenler.ToListAsync(),"OgretmenId","AdSoyad");
             return View();
         }
         [HttpPost]
@@ -30,7 +32,7 @@ namespace KursKayir.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var kurslar = await _context.Kurslar.ToListAsync();
+            var kurslar = await _context.Kurslar.Include(k=>k.Ogretmen).ToListAsync();
             return View(kurslar);
         }
 

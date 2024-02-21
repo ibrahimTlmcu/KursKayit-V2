@@ -7,6 +7,7 @@ namespace KursKayir.Data
         [Key]
         //id olarak yazarsan cozumler primary key yapar .Ozel kulnim icin [key] degeri gerekli.
         public int OgrenciKimlik { get; set; }
+       
         public string? OgrenciAd { get; set; }
 
         public string? OgrenciSoyad { get; set; }

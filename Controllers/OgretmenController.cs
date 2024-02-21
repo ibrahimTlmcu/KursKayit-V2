@@ -19,13 +19,18 @@ namespace KursKayir.Controllers
            
             return View(await _dataContext.Ogretmenler.ToListAsync());
         }
+        [HttpGet]
+        public  IActionResult Create()
+        {
+            return View();
+        }
 
-   
+        [HttpPost]
         public async Task<IActionResult> Create(Ogretmen model)
         {
             _dataContext.Ogretmenler.Add(model);
             await _dataContext.SaveChangesAsync();
-            return View(model);
+            return RedirectToAction("Index","Ogretmen");
             
         }
 
@@ -58,7 +63,55 @@ namespace KursKayir.Controllers
             await _dataContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
 
+            var ogretmen = await _dataContext.Ogretmenler
+                .FirstOrDefaultAsync(ogr =>ogr.OgretmenId == id);
+
+            if(ogretmen == null)
+            {
+                return NotFound();
+            }
+
+            return View(ogretmen);
+        }
+        [HttpPost]
+
+        public async Task<IActionResult> Edit(int id, Ogretmen model)
+        {
+            if (id != model.OgretmenId)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _dataContext.Update(model);
+                    await _dataContext.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!_dataContext.Ogretmenler.Any(o => o.OgretmenId == model.OgretmenId))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction("index");
+            }
+            return View(model);
+        }
 
 
     }
